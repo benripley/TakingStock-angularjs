@@ -1,0 +1,49 @@
+{
+  "name": "web",
+  "version": "0.0.0",
+  "dependencies": {
+    "animate.css": "~3.3.0",
+    "angular": "~1.4.0",
+    "angular-animate": "~1.4.0",
+    "angular-cookies": "~1.4.0",
+    "angular-touch": "~1.4.0",
+    "angular-resource": "~1.4.0",
+    "angular-sanitize": "~1.4.0",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.4",
+    "flot": "~0.8.3",
+    "fontawesome": "~4.4.0",
+    "jquery": "~1.11.3",
+    "moment": "~2.10.3",
+    "underscore": "~1.8.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "fontawesome": {
+      "main": [
+        "css/font-awesome.css"
+      ]
+    },
+    "flot": {
+      "main": [
+        "excanvas.min.js",
+        "jquery.flot.js",
+        "jquery.flot.pie.js",
+        "jquery.flot.tooltip.js",
+        "jquery.flot.time.js"
+      ]
+    }
+  },
+  "resolutions": {
+    "jquery": "~1.11.3",
+    "angular": "~1.4.0"
+  }
+}

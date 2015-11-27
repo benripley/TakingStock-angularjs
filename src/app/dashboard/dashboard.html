@@ -1,0 +1,196 @@
+<div id="wrapper">
+	<div class="content">
+
+		<div class="container">
+
+			<div class="layout layout-stack-sm layout-main-left">
+
+				<div class="col-sm-8 col-md-9 layout-main">
+					
+					<div class="row" style="margin-bottom: 2em;">
+						
+						<div class="col-sm-4 col-md-6">
+							<div class="portlet portlet-default">
+								<div class="portlet-header">
+									<h4 class="portlet-title">
+										Daily Statistics
+									</h4>
+								</div> 
+
+								<div class="portlet-body">                
+									<table class="table keyvalue-table">
+										<tbody>
+											<tr>
+												<td class="kv-key"><i class="fa fa-dollar kv-icon kv-icon-primary"></i> Gain/Loss</td>
+												<td class="kv-value">
+													<i class="fa" ng-class="vm.gainLoss>=0 ? 'fa-caret-up text-success' : 'fa-caret-down text-danger'"> <small>{{ vm.gainLossPercent | percentage:1 }}</small></i> &nbsp;
+													{{ vm.gainLoss | currency:"$":0 }} 
+												</td>
+											</tr>
+											<tr>
+												<td class="kv-key"><i class="fa fa-dollar kv-icon kv-icon-secondary"></i> Market Value</td>
+												<td class="kv-value">
+													<i class="fa" ng-class="vm.change>=0 ? 'fa-caret-up text-success' : 'fa-caret-down text-danger'"> <small>{{ vm.changePercent | percentage:1 }}</small></i> &nbsp;
+													{{ vm.marketValue | currency:"$":0 }} 
+												</td>
+											</tr>
+											<tr>
+												<td class="kv-key"><i class="fa fa-dollar kv-icon kv-icon-tertiary"></i> Book Value</td>
+												<td class="kv-value">{{ vm.bookValue | currency:"$":0 }}</td>
+											</tr>
+											<tr>
+												<td class="kv-key"><i class="fa fa-exchange kv-icon kv-icon-default"></i> Annual Dividends</td>
+												<td class="kv-value">{{ vm.totalAnnualDividend | currency:"$":0 }} </td>
+											</tr>
+										</tbody>
+									</table>
+									<p class="disclaimer">Quotes provided by Yahoo! Finance and are delayed by at least 15-20 minutes. Don't do anything stupid!</p>
+								</div> 
+							</div>
+						</div>
+
+						<div class="col-sm-4 col-md-3">
+							<div class="portlet portlet-default">
+								<div class="portlet-header">
+									<h4 class="portlet-title" style="margin-bottom:0">
+										Asset Allocation
+									</h4>
+								</div> 
+
+								<div class="portlet-body" style="padding-left:10px">
+									<pie-chart style="display:none; height:300px; width:300px;" ng-model="vm.assetAllocation"></pie-chart>
+								</div>           
+							</div> 
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="portlet portlet">
+
+							<div class="row">
+								<div class="col-md-6">
+									<div class="portlet-header">
+										<h4 class="portlet-title">
+											Portfolio
+										</h4>
+									</div> 
+								</div>
+								<div class="col-md-6">
+
+									<!-- http://stackoverflow.com/questions/6567119/yahoo-jsonp-ajax-request-wrapped-in-callback-function -->
+									<form class="pull-right ng-pristine ng-valid" role="search" style="position:relative;">
+							          <input type="text" id="symbolLookup" name="symbolLookup" class="form-control input-md mainnav-search-query" placeholder="Add New Position" style="padding-left: 30px">
+							          <button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>
+							        </form>
+								</div>
+							</div>
+							
+
+							<div class="portlet-body">
+
+								<div class="row">
+									<div class="col-sm-12">
+										<table class="table keyvalue-table table-striped table-bordered table-hover ui-datatable dataTable no-footer dataTable-helper" role="grid">
+											<thead>
+												<tr role="row">
+													<th>Name</th>
+													<th>Price</th>
+													<th>Day Change</th>
+													<th>Shares</th>
+													<th>Market Value</th>
+													<th>Ann Div</th>
+													<th>Gain/Loss</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr ng-repeat="holding in vm.portfolio" class="odd">
+													<td><span>{{ holding.quote.Name | titlecase }}</span></td>
+													<td><span>{{ holding.quote.LastTradePriceOnly | currency }}</span></td>
+													<td>
+														<i class="fa" ng-class="holding.quote.Change>=0 ? 'fa-caret-up text-success' : 'fa-caret-down text-danger'"></i> 
+														{{ holding.change | currency }} <small>({{ holding.changePercent | percentage:1 }})</small>
+													</td>
+													<td><span>{{ holding.quantity }}</span></td>
+													<td><span>{{ holding.marketValue | currency }}</span></td>
+													<td><span>{{ holding.totalAnnualDividend | currency }}</span></td>
+													<td>
+														<i class="fa" ng-class="holding.gain >=0 ? 'fa-caret-up text-success' : 'fa-caret-down text-danger'"></i>
+														{{ holding.gain | currency }} <small>({{ holding.gainPercent | percentage:1 }})</small>
+													</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr role="row">
+													<th></th>
+													<th></th>
+													<th></th>
+													<th></th>
+													<th>
+														<i class="fa" ng-class="vm.marketValue>=0 ? 'fa-caret-up text-success' : 'fa-caret-down text-danger'"> </i> &nbsp;
+														{{ vm.marketValue | currency:"$" }} 
+													</th>
+													<th>{{ vm.totalAnnualDividend | currency:"$" }}</th>
+													<th>
+														<i class="fa" ng-class="vm.gainLoss>=0 ? 'fa-caret-up text-success' : 'fa-caret-down text-danger'"></i> &nbsp;
+														{{ vm.gainLoss | currency:"$" }}
+													</th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-sm-4 col-md-3 layout-main">
+					<h4>For Future Use</h4>
+
+					<div class="well">
+
+						<ul class="icons-list text-md">
+							<li>
+								<i class="icon-li fa fa-comments-o text-success"></i>
+								<strong class="semibold">New Sale!</strong>
+								<br>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+							<li>
+								<i class="icon-li fa fa-check-square text-secondary"></i>
+								<strong class="semibold">New Action!</strong>
+								<br>
+								Vestibulum iaculis felis eu eros pellentesque placerat.
+							</li>
+							<li>
+								<i class="icon-li fa fa-truck text-tertiary"></i>
+								<strong class="semibold">New Product!</strong>
+								<br>
+								Curabitur cursus nisl et mauris imperdiet porttitor.
+							</li>
+							<li>
+								<i class="icon-li fa fa-comments-o text-primary"></i>
+								<strong class="semibold">New Comment!</strong>
+								<br>
+								Vestibulum iaculis felis eu eros pellentesque placerat.
+							</li>
+							<li>
+								<i class="icon-li fa fa-comments-o text-primary"></i>
+								<strong class="semibold">New Comment!</strong>
+								<br>
+								Curabitur cursus nisl et mauris imperdiet porttitor.
+							</li>
+						</ul>
+					</div> <!-- /.well -->
+
+				</div> 
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <pre>{{ vm | json }}</pre> -->
