@@ -26,7 +26,7 @@
                 deferred.reject(status);
             });
             return deferred.promise;
-        };
+        }
 
         function symbolSuggest(query) {
             return null;
