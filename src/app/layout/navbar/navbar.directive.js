@@ -24,7 +24,6 @@
       var vm = this;
 
       vm.isActive = isActive;
-      console.log(authService);
       vm.authentication = authService.authentication;
 
       function isActive(path) {

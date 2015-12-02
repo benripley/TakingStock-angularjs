@@ -50,40 +50,5 @@
     <!-- endinject -->
     <!-- endbuild -->
 
-
-    <script type="text/javascript">
-    // this variable must be defined this way
-    var YAHOO = {
-        Finance: {
-            SymbolSuggest: {}
-        }
-    };
-
-    $(document).ready(function(){           
-        var query;
-
-        query = 'Yahoo';        
-        if (query.length > 0)
-        {
-
-          $.ajax({
-              type: "GET",
-              url: "http://d.yimg.com/aq/autoc",
-              data: {query: query, region:'US', lang:'en-US' },
-              dataType: "jsonp",
-              jsonp : "callback",
-              jsonpCallback: "YAHOO.Finance.SymbolSuggest.ssCallback",
-          });
-          // call back function
-          YAHOO.Finance.SymbolSuggest.ssCallback = function (data) {
-            console.log(JSON.stringify(data));
-          }
-        }
-
-    }); 
-
-
-    </script> 
-
   </body>
 </html>

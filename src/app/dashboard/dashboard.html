@@ -76,12 +76,7 @@
 									</div> 
 								</div>
 								<div class="col-md-6">
-
-									<!-- http://stackoverflow.com/questions/6567119/yahoo-jsonp-ajax-request-wrapped-in-callback-function -->
-									<form class="pull-right ng-pristine ng-valid" role="search" style="position:relative;">
-							          <input type="text" id="symbolLookup" name="symbolLookup" class="form-control input-md mainnav-search-query" placeholder="Add New Position" style="padding-left: 30px">
-							          <button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>
-							        </form>
+									<button class="btn btn-sm btn-secondary pull-right" data-toggle="modal" data-target="#addPositionModal"><i class="fa fa-plus"></i> Add Position</button>
 								</div>
 							</div>
 							
@@ -151,7 +146,6 @@
 					<h4>For Future Use</h4>
 
 					<div class="well">
-
 						<ul class="icons-list text-md">
 							<li>
 								<i class="icon-li fa fa-comments-o text-success"></i>
@@ -184,13 +178,90 @@
 								Curabitur cursus nisl et mauris imperdiet porttitor.
 							</li>
 						</ul>
-					</div> <!-- /.well -->
-
+					</div> 
 				</div> 
 
 			</div>
 		</div>
+
+
+
+<style type="text/css">
+  .css-form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+  .css-form input.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }
+</style>
+
+		<div class="modal modal-styled fade" id="addPositionModal" tabindex="-1" role="dialog" aria-labelledby="addPositionModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="addPositionModalLabel">Add Position</h4>
+					</div>
+					
+					<div class="modal-body">
+
+						<form name="addPositionForm" class="form-horizontal" role="form" novalidate>
+							
+							<div class="form-group">
+								<div class="col-sm-12">
+									<symbol-suggest select="vm.symbolPicked(item)"></symbol-suggest>
+								</div>
+							</div>
+
+							<div class="form-group" ng-show="vm.symbol">
+								<div class="col-sm-12">
+									<div class="panel" style="margin-bottom:0">
+										<div class="panel-body text-center">
+											<h4>
+												{{ vm.symbol.name | titlecase }} &nbsp;&nbsp;&nbsp;
+												<small class="text-muted">{{ vm.symbol.exchDisp }}: {{ vm.symbol.symbol }} ({{ vm.symbol.typeDisp }})</small>
+											</h4>
+											
+											<!-- <span class="label label-primary demo-element">Primary</span> -->
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" ng-show="vm.symbol">
+								<label  class="col-md-2 col-sm-4 control-label" for="inputQuantity">Quantity</label>
+								<div class="col-md-4 col-sm-8">
+									<input type="number" class="form-control" id="inputQuantity" required min="0.01" ng-model="vm.quantity" />
+								</div>
+								<label  class="col-md-2 col-sm-4 control-label" for="inputPrice">Price</label>
+								<div class="col-md-4 col-sm-8">
+									<input type="number" class="form-control" id="inputPrice" required min="0.01" ng-model="vm.price" />
+								</div>
+							</div>
+
+							<div class="form-group" ng-show="vm.symbol">
+								<label  class="col-md-2 col-sm-4 control-label" for="inputCommission">Commission</label>
+								<div class="col-md-4 col-sm-8">
+									<input type="number" class="form-control" id="inputCommission" ng-model="vm.commission" />
+								</div>
+								<label  class="col-md-2 col-sm-4 control-label" for="inputDate">Date</label>
+								<div class="col-md-4 col-sm-8">
+									<input type="date" class="form-control" id="inputDate" required ng-model="vm.date" />
+								</div>
+							</div>
+
+						</form>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button ng-show="vm.symbol" type="button" class="btn btn-primary" ng-disabled="addPositionForm.$invalid" ng-click="vm.addPosition()">Save changes</button>
+					</div>
+				</div>
+			</div> 
+
+		</div>
 	</div>
-</div>
 
 <!-- <pre>{{ vm | json }}</pre> -->

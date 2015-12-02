@@ -1,0 +1,13 @@
+<div>
+	<div style="position:relative;">
+		<input ng-model="term" ng-model-options="{debounce:{'default':300,'blur':0}}" ng-change="vm.query()" type="text" autocomplete="off" class="form-control" style="padding-left:30px" />
+		<button class="btn btn-sm" style="position: absolute; top: 2px; right: auto; left: 5px; padding-right: 5px; padding-left: 5px; background-color: transparent; color: #d74b4b;"><i class="fa fa-search"></i></button>
+
+		<div class="list-group" style="position:absolute; left:0;right:0;font-size: smaller; z-index: 100;">
+		  <a href="" class="list-group-item" ng-repeat="item in vm.items" ng-click="vm.selectItem(item)">
+		    <h6 class="list-group-item-heading">{{ item.name }}</h6>
+		    <p class="list-group-item-text"><small class="text-muted">{{ item.symbol }} ({{ item.exchDisp }})</small></p>
+		  </a>
+		</div>
+	</div>
+</div>

@@ -20,6 +20,7 @@
             var url = 'https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol in (' + symbolString + ')&env=http://datatables.org/alltables.env&format=json&callback=JSON_CALLBACK';
             var deferred = $q.defer();
             $http.jsonp(url).success(function (data, status, headers, config) {
+                console.log(data);
                 deferred.resolve(data.query.results.quote);
             }).error(function (data, status, headers, config) {
                 //this always gets called
