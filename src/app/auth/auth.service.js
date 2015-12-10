@@ -6,7 +6,7 @@
         .factory('authService', authService);
 
     /** @ngInject */
-    function authService($http, $q, localStorageService, authSettings) {
+    function authService($location, $http, $q, localStorageService, authSettings, configService) {
         
         var authentication = {
             isAuth: false,
@@ -21,11 +21,14 @@
         };
 
         var serviceBase = authSettings.apiServiceBaseUri;
+        var backend = { name: 'test' };
 
         var service = {
+            changeBackend: changeBackend,
+            backend: backend,
             register: register,
             login: login,
-            logOut: logout,
+            logout: logout,
             fillAuthData: fillAuthData,
             authentication: authentication,
             refreshToken: refreshToken,
@@ -36,14 +39,17 @@
 
         return service;
 
-
+        function changeBackend(backend) {
+            serviceBase = 'http://' + backend.hostname + ':' + backend.port;
+            service.backend = backend;
+        }
         
 
         function register(registration) {
 
             logout();
 
-            return $http.post(serviceBase + 'api/account/register', registration).then(function (response) {
+            return $http.post(serviceBase + '/api/account/register', registration).then(function (response) {
                 return response;
             });
 
@@ -60,7 +66,7 @@
             var deferred = $q.defer();
 
             //$http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
-            $http.post(serviceBase + 'account/token?access_token=ben.ripley@gmail.com', loginData).success(function (response) {
+            $http.post(serviceBase + '/account/token?access_token=ben.ripley@gmail.com', loginData).success(function (response) {
 
                 if (loginData.useRefreshTokens) {
                     localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
@@ -89,6 +95,8 @@
             authentication.isAuth = false;
             authentication.userName = "";
             authentication.useRefreshTokens = false;
+
+            $location.path('/#');
 
         }
 
@@ -136,7 +144,7 @@
 
             var deferred = $q.defer();
 
-            $http.get(serviceBase + 'api/account/ObtainLocalAccessToken', { params: { provider: externalData.provider, externalAccessToken: externalData.externalAccessToken } }).success(function (response) {
+            $http.get(serviceBase + '/api/account/ObtainLocalAccessToken', { params: { provider: externalData.provider, externalAccessToken: externalData.externalAccessToken } }).success(function (response) {
 
                 localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
 
@@ -158,7 +166,7 @@
 
             var deferred = $q.defer();
 
-            $http.post(serviceBase + 'api/account/registerexternal', registerExternalData).success(function (response) {
+            $http.post(serviceBase + '/api/account/registerexternal', registerExternalData).success(function (response) {
 
                 localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
 

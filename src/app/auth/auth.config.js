@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var serviceBase = 'http://localhost:8080/';
+    var serviceBase = 'http://localhost:8080';
 
     angular
         .module('app.auth')

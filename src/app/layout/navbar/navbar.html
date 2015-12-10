@@ -184,10 +184,24 @@
               </a>
             </li>
 
+            <li>
+              <a href="" ng-click="vm.changeBackend('node')">
+                <input type="checkbox" ng-checked="vm.active_config === 'node_development'" />
+                &nbsp;&nbsp;Use Node
+              </a>
+            </li>
+
+            <li>
+              <a href="" ng-click="vm.changeBackend('asp5')">
+                <input type="checkbox" ng-checked="vm.active_config === 'asp5_development'" /> 
+                &nbsp;&nbsp;Use Asp 5
+              </a>
+            </li>
+
             <li class="divider"></li>
 
             <li>
-              <a href="./account-login.html">
+              <a href="" ng-click="vm.logout()">
                 <i class="fa fa-sign-out"></i> 
                 &nbsp;&nbsp;Logout
               </a>

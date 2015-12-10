@@ -6,7 +6,6 @@
     	'ngCookies', 
     	'ngTouch', 
     	'ngSanitize', 
-    	'ngResource', 
     	'ui.router', 
     	'LocalStorageModule'
     	]);

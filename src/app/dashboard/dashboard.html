@@ -1,15 +1,15 @@
 <div id="wrapper">
-	<div class="content">
+	<div class="">
 
 		<div class="container">
 
-			<div class="layout layout-stack-sm layout-main-left">
+			<div class="layout-main-left">
 
-				<div class="col-sm-8 col-md-9 layout-main">
+				<div class="col-sm-8 layout-main">
 					
 					<div class="row" style="margin-bottom: 2em;">
 						
-						<div class="col-sm-4 col-md-6">
+						<div class="col-md-6">
 							<div class="portlet portlet-default">
 								<div class="portlet-header">
 									<h4 class="portlet-title">
@@ -49,7 +49,7 @@
 							</div>
 						</div>
 
-						<div class="col-sm-4 col-md-3">
+						<div class="col-md-6">
 							<div class="portlet portlet-default">
 								<div class="portlet-header">
 									<h4 class="portlet-title" style="margin-bottom:0">
@@ -57,8 +57,12 @@
 									</h4>
 								</div> 
 
-								<div class="portlet-body" style="padding-left:10px">
-									<pie-chart style="display:none; height:300px; width:300px;" ng-model="vm.assetAllocation"></pie-chart>
+								<div class="portlet-body">
+								<div ng-show="vm.assetAllocation">
+									<highchart id="assetAllocationChart" config="vm.assetAllocation"></highchart>
+								</div>
+									
+									<!--<pie-chart style="display:none; height:300px; width:300px;" ng-model="vm.assetAllocation"></pie-chart>-->
 								</div>           
 							</div> 
 						</div>
@@ -142,43 +146,31 @@
 
 
 
-				<div class="col-sm-4 col-md-3 layout-main">
-					<h4>For Future Use</h4>
+				<div class="col-sm-4 layout-sidebar">
+					<div class="portlet portlet-default">
 
-					<div class="well">
-						<ul class="icons-list text-md">
-							<li>
-								<i class="icon-li fa fa-comments-o text-success"></i>
-								<strong class="semibold">New Sale!</strong>
-								<br>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-							<li>
-								<i class="icon-li fa fa-check-square text-secondary"></i>
-								<strong class="semibold">New Action!</strong>
-								<br>
-								Vestibulum iaculis felis eu eros pellentesque placerat.
-							</li>
-							<li>
-								<i class="icon-li fa fa-truck text-tertiary"></i>
-								<strong class="semibold">New Product!</strong>
-								<br>
-								Curabitur cursus nisl et mauris imperdiet porttitor.
-							</li>
-							<li>
-								<i class="icon-li fa fa-comments-o text-primary"></i>
-								<strong class="semibold">New Comment!</strong>
-								<br>
-								Vestibulum iaculis felis eu eros pellentesque placerat.
-							</li>
-							<li>
-								<i class="icon-li fa fa-comments-o text-primary"></i>
-								<strong class="semibold">New Comment!</strong>
-								<br>
-								Curabitur cursus nisl et mauris imperdiet porttitor.
-							</li>
-						</ul>
-					</div> 
+					
+						<div class="portlet-header">
+							<h4 class="portlet-title">
+								My Feed
+							</h4>
+						</div> 
+				        			
+				        <div class="portlet-body">	
+							<div class="well">
+								<ul class="icons-list text-md">
+									<li ng-repeat="ni in vm.news">
+										<i class="icon-li fa fa-comments-o text-primary"></i>
+										<span class="">{{ni.title}}</span>
+										<br>
+										<a class="pull-left" ng-href="{{ni.link}}" target="_blank">Read more...</a>
+										<span class="pull-right"><i class="fa fa-clock-o"></i> 2 days ago</span>
+										<div class="feed-actions"></div>
+									</li>
+								</ul>
+							</div> 
+						</div>
+					</div>
 				</div> 
 
 			</div>

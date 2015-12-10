@@ -12,8 +12,8 @@
     "angular-ui-router": "~0.2.15",
     "animate.css": "~3.3.0",
     "bootstrap": "~3.3.4",
-    "flot": "~0.8.3",
     "fontawesome": "~4.4.0",
+    "highcharts-ng": "~0.0.11",
     "jquery": "~1.11.3",
     "moment": "~2.10.3",
     "underscore": "~1.8.3"
@@ -31,15 +31,6 @@
     "fontawesome": {
       "main": [
         "css/font-awesome.css"
-      ]
-    },
-    "flot": {
-      "main": [
-        "excanvas.min.js",
-        "jquery.flot.js",
-        "jquery.flot.pie.js",
-        "jquery.flot.tooltip.js",
-        "jquery.flot.time.js"
       ]
     }
   },
